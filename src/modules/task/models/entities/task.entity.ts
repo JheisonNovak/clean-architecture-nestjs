@@ -1,0 +1,24 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TaskStatus } from "../enums/task-status.enum";
+
+@Entity({ name: "task" })
+export class TaskEntity {
+	@PrimaryGeneratedColumn()
+	id: number;
+
+	@Column()
+	title: string;
+
+	@Column()
+	description: string;
+
+	@Column({ default: TaskStatus.PENDING })
+	status: string;
+
+	@Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
+	createdAt: Date;
+
+	constructor(task?: Partial<TaskEntity>) {
+		Object.assign(this, task);
+	}
+}
