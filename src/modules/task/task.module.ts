@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { FindAllTaskController } from "./use-cases/find-all/find-all.controller";
+import { FindAllTaskUseCase } from "./use-cases/find-all/find-all.use-case";
 import { CreateTaskController } from "./use-cases/create/create.controller";
 import { CreateTaskUseCase } from "./use-cases/create/create.use-case";
 import { TaskTypeOrmRepository } from "./repositories/task.repository";
@@ -7,7 +9,7 @@ import { TaskEntity } from "./models/entities/task.entity";
 
 @Module({
 	imports: [TypeOrmModule.forFeature([TaskEntity])],
-	controllers: [CreateTaskController],
+	controllers: [CreateTaskController, FindAllTaskController],
 	providers: [
 		TaskTypeOrmRepository,
 		{
@@ -15,7 +17,8 @@ import { TaskEntity } from "./models/entities/task.entity";
 			useExisting: TaskTypeOrmRepository,
 		},
 		CreateTaskUseCase,
+	    FindAllTaskUseCase,
 	],
-	exports: ["ITaskRepository", CreateTaskUseCase],
+	exports: ["ITaskRepository", CreateTaskUseCase, FindAllTaskUseCase],
 })
 export class TaskModule {}

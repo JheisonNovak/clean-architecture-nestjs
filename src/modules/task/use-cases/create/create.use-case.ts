@@ -16,7 +16,7 @@ export class CreateTaskUseCase {
 		Object.assign(task, dto as TaskEntity);
 		try {
 			const createdTask = await this.taskRepository.create(task);
-			return new ResponseDto("Task created successfully", createdTask);
+			return new ResponseDto<TaskEntity>("Task created successfully", createdTask);
 		} catch {
 			throw new BadRequestException("Failed to create task");
 		}

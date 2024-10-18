@@ -13,7 +13,7 @@ export class TaskEntity {
 	description: string;
 
 	@Column({ default: TaskStatus.PENDING })
-	status: string;
+	status: TaskStatus;
 
 	@Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
 	createdAt: Date;
