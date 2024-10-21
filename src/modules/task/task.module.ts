@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { DeleteTaskController } from "./use-cases/delete/delete.controller";
+import { DeleteTaskUseCase } from "./use-cases/delete/delete.use-case";
 import { UpdateTaskController } from "./use-cases/update/update.controller";
 import { UpdateTaskUseCase } from "./use-cases/update/update.use-case";
 import { FindOneByIdTaskController } from "./use-cases/find-one-by-id/find-one-by-id.controller";
@@ -13,7 +15,7 @@ import { TaskEntity } from "./models/entities/task.entity";
 
 @Module({
 	imports: [TypeOrmModule.forFeature([TaskEntity])],
-	controllers: [CreateTaskController, FindAllTaskController, FindOneByIdTaskController, UpdateTaskController],
+	controllers: [CreateTaskController, FindAllTaskController, FindOneByIdTaskController, UpdateTaskController, DeleteTaskController],
 	providers: [
 		TaskTypeOrmRepository,
 		{
@@ -24,7 +26,8 @@ import { TaskEntity } from "./models/entities/task.entity";
 	    FindAllTaskUseCase,
 	    FindOneByIdTaskUseCase,
 	    UpdateTaskUseCase,
+	    DeleteTaskUseCase,
 	],
-	exports: ["ITaskRepository", CreateTaskUseCase, FindAllTaskUseCase, FindOneByIdTaskUseCase, UpdateTaskUseCase],
+	exports: ["ITaskRepository", CreateTaskUseCase, FindAllTaskUseCase, FindOneByIdTaskUseCase, UpdateTaskUseCase, DeleteTaskUseCase],
 })
 export class TaskModule {}
