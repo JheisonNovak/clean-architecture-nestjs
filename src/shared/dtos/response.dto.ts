@@ -1,11 +1,11 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class ResponseDto<T> {
 	@ApiProperty()
 	message: string;
-	@ApiProperty()
+	@ApiPropertyOptional()
 	data?: T;
-	@ApiProperty()
+	@ApiProperty({ default: true })
 	success: boolean;
 
 	constructor(message: string, data?: T, success = true) {
